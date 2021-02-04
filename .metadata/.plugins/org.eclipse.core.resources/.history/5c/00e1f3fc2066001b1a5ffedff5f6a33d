@@ -1,0 +1,85 @@
+package com.hotel.demo.controller;
+
+import java.time.temporal.ChronoUnit;
+import java.sql.Date;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+
+@RestController
+public class Controllerdemo 
+{	
+	@RequestMapping("/home")
+	public String demomethod()
+	{
+		return "hi";
+	}
+	
+	@RequestMapping("/register")
+	public ModelAndView demomethod12()
+	{
+		ModelAndView mv=new ModelAndView();
+		mv.setViewName("index");
+		return mv;
+	}
+	
+	@RequestMapping("/verify")
+	public ModelAndView demomethod123(@RequestParam("fname") String fname, @RequestParam("lname") String lname, @RequestParam("emailid") String emailid, 
+			@RequestParam("dob") Date dob, @RequestParam("city") String city, @RequestParam("start_date") Date start_date,
+			@RequestParam("end_date") Date end_date)
+	{
+		ModelAndView mv=new ModelAndView();
+		User_Booking user=new User_Booking();
+		user.setFname(fname);
+		user.setLname(lname);
+		user.setEmailid(emailid);
+		user.setDob(dob);
+		user.setCity(city);
+		user.setStart_date(start_date);
+		user.setStart_date(end_date);
+		
+		SessionFactory sessionFactory=new Configuration().configure().buildSessionFactory();
+		Session session=sessionFactory.openSession();
+		session.beginTransaction();
+		session.save(user);
+		
+		session.getTransaction().commit();
+		session.close();
+		
+		int age=Integer.parseInt(user.getStart_date().toString().substring(0, 4))-Integer.parseInt(user.getDob().toString().substring(0, 4));
+		long days = ChronoUnit.DAYS.between(user.getStart_date().toLocalDate(), user.getEnd_date().toLocalDate());
+				
+//		LocalDate start_date1 = LocalDate.parse( new SimpleDateFormat("yyyy-MM-dd").format(start_date) );
+//		LocalDate end_date1 = LocalDate.parse( new SimpleDateFormat("yyyy-MM-dd").format(end_date));
+		
+//		int age = Integer.parseInt(user.getStart_date().toString().substring(0, 4)) - Integer.parseInt(user.getDob().toString().substring(0, 4));
+//		long days = ChronoUnit.DAYS.between(start_date1,end_date1);
+		
+		long cost = days*4000;
+		mv.setViewName("AfterRegister");
+
+		mv.addObject("fname", user.getFname()); 
+		mv.addObject("lname", user.getLname());
+		mv.addObject("emailid", user.getEmailid());
+		
+		System.out.println("Age is "+age);
+		
+		mv.addObject("age", age);
+		mv.addObject("days", days);
+		mv.addObject("cost", cost);
+				
+		return mv;
+	}
+	
+	@RequestMapping("/success")
+	public ModelAndView demomethod1234()
+	{
+		ModelAndView mv=new ModelAndView();
+		mv.setViewName("Success");
+		return mv;
+	}
+}

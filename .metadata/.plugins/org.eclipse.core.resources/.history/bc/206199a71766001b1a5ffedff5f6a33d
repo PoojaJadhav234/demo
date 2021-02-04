@@ -1,0 +1,132 @@
+package com.hotel.demo.controller;
+
+import java.time.LocalDate;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Booking")
+public class User_Booking
+{
+	@Id 
+	@GeneratedValue
+	private int booking_id;
+	
+	@Column(name = "First_Name")
+	private String fname;
+	
+	@Column(name = "Last_Name")
+	private String lname;
+	
+	@Column(name = "Email_ID")
+	private String emailid;
+	
+	@Column(name = "city")
+	private String city;
+	
+	@Column(name = "DOB")
+	private LocalDate dob;
+	
+	@Column(name = "Start_Date")
+	private LocalDate start_date;
+	
+	@Column(name = "End_Date")
+	private LocalDate end_date;
+	
+	public int getBooking_id() 
+	{
+		return booking_id;
+	}
+	public void setBooking_id(int booking_id) 
+	{
+		this.booking_id = booking_id;
+	}
+	
+	public String getFname() 
+	{
+		return fname;
+	}
+	public void setFname(String fname) 
+	{
+		this.fname = fname;
+	}
+	
+	public String getLname() 
+	{
+		return lname;
+	}
+	public void setLname(String lname) 
+	{
+		this.lname = lname;
+	}
+	
+	public String getEmailid() 
+	{
+		return emailid;
+	}
+	public void setEmailid(String emailid) 
+	{
+		this.emailid = emailid;
+	}
+	
+	public String getCity() 
+	{
+		return city;
+	}
+	public void setCity(String city) 
+	{
+		this.city = city;
+	}
+	public LocalDate getDob() {
+		return dob;
+	}
+	public void setDob(LocalDate dob) {
+		this.dob = dob;
+	}
+	public LocalDate getStart_date() {
+		return start_date;
+	}
+	public void setStart_date(LocalDate start_date) {
+		this.start_date = start_date;
+	}
+	public LocalDate getEnd_date() {
+		return end_date;
+	}
+	public void setEnd_date(LocalDate end_date) {
+		this.end_date = end_date;
+	}
+	
+	
+	
+//	public Date getDob() 
+//	{
+//		return dob;
+//	}
+//	public void setDob(Date dob) 
+//	{
+//		this.dob = dob;
+//	}
+//	
+//	public Date getStart_date() 
+//	{
+//		return start_date;
+//	}
+//	public void setStart_date(Date start_date) 
+//	{
+//		this.start_date = start_date;
+//	}
+//	
+//	public Date getEnd_date() 
+//	{
+//		return end_date;
+//	}
+//	public void setEnd_date(Date end_date) 
+//	{
+//		this.end_date = end_date;
+//	}	
+}
